@@ -13,6 +13,9 @@ import ProtectedRoute from "./components/ProtectedRoutes/Protectedroute";
 import DashBoard from "./Pages/admin/DashBoard/DashBoard";
 import Products from "./Pages/admin/Products/Products";
 import Users from "./Pages/admin/Users/Users";
+import ProductList from "./Pages/client/ProductList.jsx";
+import ProductDetail from "./Pages/client/ProductDetail/index.jsx";
+import Cart from "./Pages/client/Cart/index.jsx";
 
 const App = () => {
   return (
@@ -23,12 +26,15 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
-          <Route element={<ProtectedRoute  />} >
+          {/* <Route element={<ProtectedRoute  />} > */}
           <Route element={<Mainlayout />}>
             <Route path="/home" element={<Home />} />
+            <Route path="/products" element={<ProductList />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
           </Route>
-          </Route>
-           <Route path="/admin/*" element={<Adminlayout />}>
+          {/* </Route> */}
+          <Route path="/admin/*" element={<Adminlayout />}>
             <Route index element={<DashBoard />} />
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="products" element={<Products />} />
