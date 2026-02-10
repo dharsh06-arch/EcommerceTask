@@ -23,9 +23,9 @@ const Signin = () => {
   };
 
  useEffect(() => {
-  if (auth && role === "client") {
-    navigate("/home", { replace: true });
-  }
+  // if (auth && role === "client") {
+  //   navigate("/home", { replace: true });
+  // }
   if (auth && role === "admin") {
     navigate("/dashboard", { replace: true });
   }
