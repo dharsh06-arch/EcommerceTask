@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Modal, Tag, Space, Tooltip, message } from "antd";
+import { Table, Modal, Tag, Space, Tooltip, message, Divider } from "antd";
 import { Edit2, Trash, Plus, Package, DollarSign } from "lucide-react";
 import Button from "../../../components/Button/Button";
 import Input from "../../../components/Input/Input";
@@ -134,15 +134,17 @@ const handleDel = (id) => {
       title: "Products",
       dataIndex: "title",
       key: "title",
-      width: '40%',
-      render: (_, item) => (
+      width: '45%',
+   render: (_, item) => (
         <div className="flex gap-4 items-center">
-          <div className="w-14 h-14 rounded-lg bg-gray-50 border border-gray-200 p-1 flex-shrink-0">
-            <img src={item.image} alt="" className="w-full h-full object-contain" />
+          <div className="w-16 h-16 rounded-xl bg-slate-50 border border-slate-100 p-2 flex-shrink-0 group relative overflow-hidden">
+            <img src={item.image} alt="" className="w-full h-full object-contain mix-blend-multiply" />
           </div>
           <div className="max-w-xs">
-            <h1 className="font-bold text-slate-700 truncate">{item.title}</h1>
-            <p className="text-xs text-slate-500 line-clamp-1">{item.description}</p>
+            <h1 className="font-bold text-slate-800 text-sm truncate">{item.title}</h1>
+            <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed mt-0.5">
+              {item.description}
+            </p>
           </div>
         </div>
       ),
@@ -164,20 +166,14 @@ const handleDel = (id) => {
       title: "Actions",
       align: 'right',
       render: (_, item) => (
-        <Space >
-          <Tooltip title="Edit">
-            <button 
-              onClick={() => handleOpenModal(item)}
-              className="text-slate-400 hover:text-indigo-600 transition-colors cursor-pointer"
-            >
+        <Space split={<Divider type="vertical" className="bg-slate-200" />}>
+          <Tooltip title="Edit Product">
+            <button onClick={() => handleOpenModal(item)} className="p-2 text-slate-400 hover:text-indigo-600 transition-all hover:bg-indigo-50 rounded-lg">
               <Edit2 size={16} />
             </button>
           </Tooltip>
           <Tooltip title="Delete">
-            <button 
-              onClick={() => handleDel(item.id)}
-              className="text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
-            >
+            <button onClick={() => handleDel(item.id)} className="p-2 text-slate-400 hover:text-red-500 transition-all hover:bg-red-50 rounded-lg">
               <Trash size={16} />
             </button>
           </Tooltip>
@@ -188,12 +184,17 @@ const handleDel = (id) => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-indigo-950 p-3 rounded text-white">
+   
+
+         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold ">Product Management</h1>
+          <h1 className="text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+            Product Managemnet
+          </h1>
+          <p className="text-slate-500 font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, consectetur.</p>
         </div>
-        <Button variant="outline" onClick={handleAddProduct} className="flex items-center gap-2 px-6 ">
-          <Plus size={18} /> Add New Product
+        <Button onClick={handleAddProduct} className="bg-indigo-600 hover:bg-indigo-700 text-white p-4 shadow-lg shadow-indigo-100 flex items-center gap-2 border-none">
+          <Plus size={20} /> <span className="font-bold">Add Product</span>
         </Button>
       </div>
 
@@ -216,6 +217,7 @@ const handleDel = (id) => {
       <Modal
         title={editId ? 'Modify Product' : 'Create New Product'}
         open={isOpen}
+        centered
         onCancel={() => setIsOpen(false)}
         onOk={handleSaveProduct}
         // onOk={handleSaveProduct}
